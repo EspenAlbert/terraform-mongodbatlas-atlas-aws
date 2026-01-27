@@ -57,3 +57,50 @@ module "encryption_private_endpoint" {
 
   depends_on = [module.encryption]
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PrivateLink
+# ─────────────────────────────────────────────────────────────────────────────
+
+resource "mongodbatlas_private_endpoint_regional_mode" "this" {
+  count      = local.enable_regional_mode ? 1 : 0
+  project_id = var.project_id
+  enabled    = true
+}
+
+resource "mongodbatlas_privatelink_endpoint" "this" {
+  for_each      = local.privatelink_endpoints
+  project_id    = var.project_id
+  provider_name = "AWS"
+  region        = lower(replace(each.value.region, "_", "-")) # AWS format (us-east-1)
+}
+
+module "privatelink" {
+  source   = "./modules/privatelink"
+  for_each = local.privatelink_module_calls
+
+  project_id            = var.project_id
+  region                = lower(replace(each.value.region, "_", "-")) # AWS format (us-east-1)
+  private_link_id       = mongodbatlas_privatelink_endpoint.this[each.key].private_link_id
+  endpoint_service_name = mongodbatlas_privatelink_endpoint.this[each.key].endpoint_service_name
+
+  vpc_endpoint = {
+    create     = contains(keys(local.privatelink_module_managed), each.key)
+    subnet_ids = each.value.subnet_ids
+  }
+  byo_vpc_endpoint_id = try(var.privatelink_byoe[each.key].vpc_endpoint_id, null)
+
+  security_group = {
+    ids                 = try(each.value.security_group.ids, null)
+    create              = try(each.value.security_group.create, true)
+    name_prefix         = try(each.value.security_group.name_prefix, "atlas-privatelink-")
+    inbound_cidr_blocks = try(each.value.security_group.inbound_cidr_blocks, null)
+    inbound_source_sgs  = try(each.value.security_group.inbound_source_sgs, [])
+    from_port           = try(each.value.security_group.from_port, 1024)
+    to_port             = try(each.value.security_group.to_port, 65535)
+  }
+
+  tags = merge(var.aws_tags, each.value.tags)
+
+  depends_on = [mongodbatlas_private_endpoint_regional_mode.this]
+}
