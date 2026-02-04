@@ -42,12 +42,12 @@ Run 'just gen-readme' to regenerate. -->
 
 Feature | Name
 --- | ---
-Encryption at Rest | [AWS KMS Integration](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/encryption)
-Encryption at Rest | [AWS KMS Integration with Private Endpoint](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/encryption_private_endpoint)
-Private Link | [AWS PrivateLink Endpoint](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/privatelink)
-Private Link | [AWS PrivateLink Multi-Region](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/privatelink_multi_region)
-Private Link | [AWS PrivateLink BYOE](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/privatelink_byoe)
-Backup Export | [S3 Bucket Export](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/backup_export)
+Encryption at Rest | [AWS KMS Integration](./examples/encryption)
+Encryption at Rest | [AWS KMS Integration with Private Endpoint](./examples/encryption_private_endpoint)
+Private Link | [AWS PrivateLink Endpoint](./examples/privatelink)
+Private Link | [AWS PrivateLink Multi-Region](./examples/privatelink_multi_region)
+Private Link | [AWS PrivateLink BYOE](./examples/privatelink_byoe)
+Backup Export | [S3 Bucket Export](./examples/backup_export)
 
 <!-- END_TABLES -->
 <!-- BEGIN_TF_DOCS -->

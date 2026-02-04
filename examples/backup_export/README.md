@@ -35,8 +35,7 @@ Copy and use this code to get started quickly:
 **main.tf**
 ```hcl
 module "atlas_aws" {
-  source  = "EspenAlbert/atlas-aws/mongodbatlas"
-  version = "v0.0.1"
+  source  = "terraform-mongodbatlas-modules/atlas-aws/mongodbatlas"
   project_id = var.project_id
 
   backup_export = {
@@ -58,8 +57,8 @@ output "backup_export" {
 ```
 
 **Additional files needed:**
-- [variables.tf](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/backup_export/variables.tf)
-- [versions.tf](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/backup_export/versions.tf)
+- [variables.tf](./variables.tf)
+- [versions.tf](./versions.tf)
 
 
 
