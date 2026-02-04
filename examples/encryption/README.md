@@ -35,7 +35,8 @@ Copy and use this code to get started quickly:
 **main.tf**
 ```hcl
 module "atlas_aws" {
-  source  = "terraform-mongodbatlas-modules/atlas-aws/mongodbatlas"
+  source  = "EspenAlbert/atlas-aws/mongodbatlas"
+  version = "v0.0.1"
   project_id = var.project_id
 
   encryption = {
@@ -56,8 +57,8 @@ output "encryption" {
 ```
 
 **Additional files needed:**
-- [variables.tf](./variables.tf)
-- [versions.tf](./versions.tf)
+- [variables.tf](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/encryption/variables.tf)
+- [versions.tf](https://github.com/EspenAlbert/terraform-mongodbatlas-atlas-aws/blob/v0.0.1/examples/encryption/versions.tf)
 
 
 
